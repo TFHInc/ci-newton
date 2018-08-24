@@ -1,6 +1,8 @@
 # Newton
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Total Downloads][ico-downloads]][link-downloads]
 
 Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts in the [Codeigniter](https://codeigniter.com/) framework.
 
@@ -235,7 +237,11 @@ Feel free to create a GitHub issue or send a pull request with any bug fixes. Pl
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
+[ico-version]: https://img.shields.io/packagist/v/tfhinc/ci-newton.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/tfhinc/ci-newton.svg?style=flat-square
 
+[link-packagist]: https://packagist.org/packages/tfhinc/ci-newton
+[link-downloads]: https://packagist.org/packages/tfhinc/ci-newton
 [link-author]: https://github.com/crafuse
 [link-contributors]: ../../contributors
