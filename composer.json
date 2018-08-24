@@ -1,5 +1,5 @@
 {
-    "name": "TFHInc/ci-newton",
+    "name": "tfhinc/ci-newton",
     "description": "Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts in the Codeigniter framework.",
     "keywords": ["codeigniter", "ci-newton", "newton", "php", "listener", "event", "broadcast"],
     "homepage": "https://github.com/TFHInc/ci-newton",
