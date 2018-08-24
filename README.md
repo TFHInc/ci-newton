@@ -234,3 +234,8 @@ Feel free to create a GitHub issue or send a pull request with any bug fixes. Pl
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+
+[link-author]: https://github.com/crafuse
+[link-contributors]: ../../contributors

@@ -1,0 +1,34 @@
+{
+    "name": "TFHInc/ci-newton",
+    "description": "Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts in the Codeigniter framework.",
+    "keywords": ["codeigniter", "ci-newton", "newton", "php", "listener", "event", "broadcast"],
+    "homepage": "https://github.com/TFHInc/ci-newton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Colin Rafuse",
+            "email": "colin.rafuse@gmail.com",
+            "homepage": "http://colinrafuse.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=7.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "THFInc\\Newton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TFHInc\\Newton\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
