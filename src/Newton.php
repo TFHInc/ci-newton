@@ -1,10 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// Include required Newton class files
+include_once(APPPATH . 'libraries/Newton/src/NewtonListener.php');
+
 // Include the Newton Exception class files
 include_once(APPPATH . 'libraries/Newton/src/Exceptions/FileNotFoundException.php');
 include_once(APPPATH . 'libraries/Newton/src/Exceptions/ClassNotFoundException.php');
-include_once(APPPATH . 'libraries/Newton/src/Exceptions/MethodNotFoundException.php');
 include_once(APPPATH . 'libraries/Newton/src/Exceptions/ArgumentCountException.php');
 
 /**
@@ -45,7 +47,7 @@ class Newton {
         // An example file can be found in Config/newton.php
         $this->CI->config->load('newton', TRUE);
 
-        // Validate and get the config base paths
+        // Validate and get the config base paths - set defaults if needed
         if (!$this->CI->config->item('base_event_path', 'newton')) {
             $this->config['base_event_path'] = APPPATH;
         } else {
@@ -170,11 +172,6 @@ class Newton {
 
             // Construct the listener class via Reflection
             $listener_class = $this->constructReflectionClass($listener);
-
-            // Check for the 'run' method
-            if ($listener_class->hasMethod('run') === false) {
-                throw new MethodNotFoundException('The listener class ' . $event_class->getName() . ' does not have a run() method. Ensure the listener has a run() method');
-            }
 
             // Invoke the Listeners 'run' method and pass the 'event' instance
             $listener_run_method = new ReflectionMethod($listener, 'run');

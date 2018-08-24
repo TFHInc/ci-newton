@@ -1,6 +1,7 @@
 # Newton
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
+[![PHP Version][ico-php-version]][link-packagist]
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads][ico-downloads]][link-downloads]
 
@@ -128,6 +129,8 @@ class UserCreatedEvent {
 
 The `Listener` class contains the business logic that will be performed when a subscribed `Event` is broadcast. The `Listener` class will receieve an instance of the `Event` class, which includes the event properties for usage in your business logic:
 
+Note that the `Listener` class must extend the `NewtonListener` abstract class.
+
 *application/listeners/SendAdminEmailListener.php*
 ``` php
 <?php
@@ -139,13 +142,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Send the admin an email.
  *
  */
-class SendAdminEmailListener {
+class SendAdminEmailListener extends NewtonListener {
     /**
      * Run the listener.
      *
      * @return  void
      */
-    public function run(UserCreatedEvent $event): void
+    public function run($event): void
     {
         // Send the Admin an Email.
         // mailto('admin@example.com', 'New User ' . $event->email . ' just signed up!');
@@ -164,13 +167,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Update the User stats with the new User data.
  *
  */
-class UpdateUserStatsListener {
+class UpdateUserStatsListener extends NewtonListener {
     /**
      * Run the listener.
      *
      * @return  void
      */
-    public function run(UserCreatedEvent $event): void
+    public function run($event): void
     {
         // Update the User Stats.
         //
@@ -238,6 +241,7 @@ Feel free to create a GitHub issue or send a pull request with any bug fixes. Pl
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/tfhinc/ci-newton.svg?style=flat-square
+[ico-php-version]: https://img.shields.io/packagist/php-v/tfhinc/ci-newton.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/tfhinc/ci-newton.svg?style=flat-square
 
