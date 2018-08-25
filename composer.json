@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "THFInc\\Newton\\": "src"
+            "TFHInc\\Newton\\": "src"
         }
     }
 }
