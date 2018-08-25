@@ -11,9 +11,11 @@ Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts 
 
 ### Manual Install
 
-- Download the source code .zip and extract
-- Copy the `Newton` directory into `application/libraries/`
-- Copy the `Newton/Config/newton.example.php` file into `application/config/newton.php`
+```bash
+composer require tfhinc/ci-newton
+```
+
+- Copy the `Newton/Config/newton.php` file into `application/config/newton.php`
 - Copy the `Newton/Helpers/newton_helper.php` file into `application/helpers/newton_helper.php`
 
 ## Configuration
@@ -42,35 +44,28 @@ $config['base_event_path'] = APPPATH;
 $config['base_listener_path'] = APPPATH;
 ```
 
-See the `Subscriptions` section of the documentation for further details.
 ### Subscriptions
 
 See the `Subscriptions` section of the documentation for further details.
 
 ## Loading the Library
 
-There are a few available options for loading the Newton libray:
+There are a few available options for loading the Newton library:
 
 ### Using the `newton()` helper function
 
-The Newton helper function will resolve the library via the CI instance. It will either load the library or return the existing library instance:
+The Newton helper function will resolve the Newton class via the CI instance. It will either load the class or return the existing class instance:
 
 ``` php
 $this->load->helper('newton');
 ```
 
-### Using the Newton library
+### Using the Newton Class
 
-The Newton library can be loaded when you require it:
-
-``` php
-$this->load->library('Newton/src/Newton');
-```
-
-or autoloaded in the `config/autoload.php`:
+The Newton class can be instantiated when you require it:
 
 ``` php
-$autoload['libraries'] = array('Newton/src/Newton');
+$newton = new TFHInc/Newton/Newton();
 ```
 
 ## Class Structure
@@ -129,12 +124,11 @@ class UserCreatedEvent {
 
 The `Listener` class contains the business logic that will be performed when a subscribed `Event` is broadcast. The `Listener` class will receieve an instance of the `Event` class, which includes the event properties for usage in your business logic:
 
-Note that the `Listener` class must extend the `NewtonListener` abstract class.
+Note that the `Listener` class must extend the `TFHInc/Newton/NewtonListener` abstract class.
 
 *application/listeners/SendAdminEmailListener.php*
 ``` php
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * SendAdminEmailListener
@@ -142,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Send the admin an email.
  *
  */
-class SendAdminEmailListener extends NewtonListener {
+class SendAdminEmailListener extends TFHInc/Newton/NewtonListener {
     /**
      * Run the listener.
      *
@@ -159,7 +153,6 @@ class SendAdminEmailListener extends NewtonListener {
 *application/listeners/UpdateUserStatsListener.php*
 ```php
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
  * UpdateUserStatsListener
@@ -167,7 +160,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Update the User stats with the new User data.
  *
  */
-class UpdateUserStatsListener extends NewtonListener {
+class UpdateUserStatsListener extends TFHInc/Newton/NewtonListener {
     /**
      * Run the listener.
      *
@@ -205,8 +198,8 @@ newton()->subscribe('UserCreatedEvent', [
     'UpdateUserStatsListener'
 ]);
 
-// Subscribe the Event Listeners via Newton library
-$this->newton->subscribe('UserCreatedEvent', [
+// Subscribe the Event Listeners via Newton class
+$newton->subscribe('UserCreatedEvent', [
     'SendAdminEmailListener',
     'UpdateUserStatsListener'
 ]);
@@ -220,8 +213,8 @@ An `Event` can be broadcast via the `broadcast()` method using the Newton librar
 // Broadcast an Event to all Subscribed Listeners via Newton helper
 newton()->broadcast('UserCreatedEvent', 'bob@example.com', 'Bob', 'Belcher');
 
-// Broadcast an Event to all Subscribed Listeners via Newton library
-$this->newton->broadcast('UserCreatedEvent', 'bob@example.com', 'Bob', 'Belcher');
+// Broadcast an Event to all Subscribed Listeners via Newton class
+$newton->broadcast('UserCreatedEvent', 'bob@example.com', 'Bob', 'Belcher');
 ```
 
 In this example, the `UserCreatedEvent` class will be instantiated and will

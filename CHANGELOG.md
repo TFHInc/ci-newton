@@ -2,6 +2,22 @@
 
 All notable changes to the `ci-newton` will be documented in this change log file.
 
+## v2.0.2 - 2018-08-25
+
+### Changed
+- Updated readme
+- Renamed the example config file
+
+## v2.0.1 - 2018-08-25
+
+### Fixed
+- Spelling error in composer.json
+
+## v2.0.0 - 2018-08-25
+
+### Changed
+- Modified package to use namespaces
+
 ## v1.1.0 - 2018-08-24
 
 ### Changed
@@ -10,7 +26,7 @@ All notable changes to the `ci-newton` will be documented in this change log fil
 ## v1.1.0-alpha - 2018-08-24
 
 ### Added
-- z
+- Add abstract listener class
 
 ### Changed
 - Updated readme
