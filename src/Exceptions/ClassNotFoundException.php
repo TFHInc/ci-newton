@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace TFHInc\Newton\Exceptions;
 
 /**
  * Class Not Found Exception
@@ -7,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * A class doesn't exist.
  *
  */
-class ClassNotFoundException extends Exception {
+class ClassNotFoundException extends \Exception {
     /**
      * Construct the exception.
      *

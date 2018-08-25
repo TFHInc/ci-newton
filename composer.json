@@ -22,13 +22,5 @@
         "psr-4": {
             "THFInc\\Newton\\": "src"
         }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TFHInc\\Newton\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "phpunit"
     }
 }

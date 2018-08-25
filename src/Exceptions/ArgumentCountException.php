@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace TFHInc\Newton\Exceptions;
 
 /**
  * Argument Count Exception
@@ -7,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * The argument counts for the event do not match.
  *
  */
-class ArgumentCountException extends Exception {
+class ArgumentCountException extends \Exception {
     /**
      * Construct the exception.
      *

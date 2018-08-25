@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace TFHInc\Newton\Exceptions;
 
 /**
  * File Not Found Exception
@@ -7,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * A file doesn't exist.
  *
  */
-class FileNotFoundException extends Exception {
+class FileNotFoundException extends \Exception {
     /**
      * Construct the exception.
      *

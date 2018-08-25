@@ -3,16 +3,16 @@ if (!function_exists('newton')) {
     /**
      * Return an instance of the Newton Library.
      *
-     * @return Newton
+     * @return TFHInc\Newton\Newton
      */
-    function newton(): Newton
+    function newton(): TFHInc\Newton\Newton
     {
         $CI =& get_instance();
 
         if (!isset($CI->newton)) {
-            $CI->load->library('Newton/src/Newton');
-        } elseif (!$CI->newton instanceof Newton) {
-            $CI->load->library('Newton/src/Newton');
+            $CI->newton = new TFHInc\Newton\Newton();
+        } elseif (!$CI->newton instanceof TFHInc\Newton\Newton) {
+            $CI->newton = new TFHInc\Newton\Newton();
         }
 
         return $CI->newton;

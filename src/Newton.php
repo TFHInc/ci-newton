@@ -1,13 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-// Include required Newton class files
-include_once(APPPATH . 'libraries/Newton/src/NewtonListener.php');
-
-// Include the Newton Exception class files
-include_once(APPPATH . 'libraries/Newton/src/Exceptions/FileNotFoundException.php');
-include_once(APPPATH . 'libraries/Newton/src/Exceptions/ClassNotFoundException.php');
-include_once(APPPATH . 'libraries/Newton/src/Exceptions/ArgumentCountException.php');
+namespace TFHInc\Newton;
 
 /**
  * Newton
@@ -98,7 +91,7 @@ class Newton {
         // Validate the event class constructor argument count against the provided argument count
         // Throw an exception if the count does not equal
         if (count($event_class->getConstructor()->getParameters()) !== count($arguments)) {
-            throw new ArgumentCountException('The argument count is incorrect for the ' . $event . ' class constructor.');
+            throw new Exceptions\ArgumentCountException('The argument count is incorrect for the ' . $event . ' class constructor.');
         }
 
         // Create a new event class instance and pass the provided arguments
@@ -174,7 +167,7 @@ class Newton {
             $listener_class = $this->constructReflectionClass($listener);
 
             // Invoke the Listeners 'run' method and pass the 'event' instance
-            $listener_run_method = new ReflectionMethod($listener, 'run');
+            $listener_run_method = new \ReflectionMethod($listener, 'run');
             $listener_run_method->invoke(new $listener, $event_instance);
         }
     }
@@ -198,7 +191,7 @@ class Newton {
         if (file_exists($class_file) && is_readable($class_file)) {
             include_once($class_file);
         } else {
-            throw new FileNotFoundException('The file ' . $class_file . ' does not exist or is not readable.');
+            throw new Exceptions\FileNotFoundException('The file ' . $class_file . ' does not exist or is not readable.');
         }
     }
 
@@ -211,9 +204,9 @@ class Newton {
     private function constructReflectionClass($class_name)
     {
         try {
-            return new ReflectionClass($class_name);
-        } catch (ReflectionException | Exception $e) {
-            throw new ClassNotFoundException('The class ' . $class_name . ' does not exist and cannot be constructed.');
+            return new \ReflectionClass($class_name);
+        } catch (\ReflectionException | \Exception $e) {
+            throw new Exceptions\ClassNotFoundException('The class ' . $class_name . ' does not exist and cannot be constructed.');
         }
     }
 }
