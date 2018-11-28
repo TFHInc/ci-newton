@@ -13,8 +13,8 @@ Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts 
 composer require tfhinc/ci-newton
 ```
 
-- Copy the `Newton/Config/newton.php` file into `application/config/newton.php`
-- Copy the `Newton/Helpers/newton_helper.php` file into `application/helpers/newton_helper.php`
+- Copy the `tfhinc/ci-newton/src/Config/newton.php` file to `application/config/newton.php`
+- Copy the `tfhinc/ci-newton/src/Helpers/newton_helper.php` file to `application/helpers/newton_helper.php`
 
 ## Loading the Library
 
