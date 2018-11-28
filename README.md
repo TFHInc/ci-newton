@@ -9,8 +9,6 @@ Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts 
 
 ## Installation
 
-### Manual Install
-
 ```bash
 composer require tfhinc/ci-newton
 ```
