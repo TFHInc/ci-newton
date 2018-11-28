@@ -2,6 +2,13 @@
 
 All notable changes to the `ci-newton` will be documented in this change log file.
 
+## v2.0.3 - 2018-11-27
+
+### Changed
+- Updated readme
+- Added additional support for namespaces
+- Added support for Echelon queues
+
 ## v2.0.2 - 2018-08-25
 
 ### Changed
