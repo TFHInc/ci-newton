@@ -18,36 +18,6 @@ composer require tfhinc/ci-newton
 - Copy the `Newton/Config/newton.php` file into `application/config/newton.php`
 - Copy the `Newton/Helpers/newton_helper.php` file into `application/helpers/newton_helper.php`
 
-## Configuration
-
-### Base Paths
-
-The base paths for the `Listener` and `Event` class file locations must be defined:
-
-```php
-// Base Event path: application/events/
-$config['base_event_path'] = APPPATH . 'events/';
-
-// Base Listener path: application/listeners/
-$config['base_listener_path'] = APPPATH . 'listeners/';
-```
-
-You will need to manually create the `application/events/` and `application/listeners/` directories if you'd like to structure your `Events` and `Listeners` into their own directories off of the application root.
-
-If you'd prefer to store the `Event` and `Listener` classes in sub directories throughout your application, you can set the base paths to the `APPPATH` and then provide the specific directory structure when defining your subscriptions.
-
-```php
-// Base Event path: application/
-$config['base_event_path'] = APPPATH;
-
-// Base Listener path: application/
-$config['base_listener_path'] = APPPATH;
-```
-
-### Subscriptions
-
-See the `Subscriptions` section of the documentation for further details.
-
 ## Loading the Library
 
 There are a few available options for loading the Newton library:
@@ -80,6 +50,8 @@ The `Event` class defines the properties that a given event will require and rec
 ``` php
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+namespace Events;
 
 /**
  * UserCreatedEvent
@@ -130,6 +102,8 @@ Note that the `Listener` class must extend the `TFHInc/Newton/NewtonListener` ab
 ``` php
 <?php
 
+namespace Listeners;
+
 /**
  * SendAdminEmailListener
  *
@@ -154,6 +128,8 @@ class SendAdminEmailListener extends TFHInc/Newton/NewtonListener {
 ```php
 <?php
 
+namespace Listeners;
+
 /**
  * UpdateUserStatsListener
  *
@@ -169,7 +145,6 @@ class UpdateUserStatsListener extends TFHInc/Newton/NewtonListener {
     public function run($event): void
     {
         // Update the User Stats.
-        //
     }
 }
 ```
@@ -182,26 +157,19 @@ You can subscribe `Listener` classes to the `Event` classes. This means when the
 
 ``` php
 $config['subscriptions'] = [
-    'UserCreatedEvent' => [
-        'SendAdminEmailListener',
-        'UpdateUserStatsListener'
-   ]
+    'Events\UserCreatedEvent' => [
+        'Listeners\SendAdminEmailListener',
+        'Listeners\UpdateUserStatsListener'
+    ]
 ];
 ```
 
 ### Via Subscribe Method
 
 ```php
-// Subscribe the Event Listeners via Newton helper
-newton()->subscribe('UserCreatedEvent', [
-    'SendAdminEmailListener',
-    'UpdateUserStatsListener'
-]);
-
-// Subscribe the Event Listeners via Newton class
-$newton->subscribe('UserCreatedEvent', [
-    'SendAdminEmailListener',
-    'UpdateUserStatsListener'
+newton()->subscribe('Events\UserCreatedEvent', [
+    'Listeners\SendAdminEmailListener',
+    'Listeners\UpdateUserStatsListener'
 ]);
 ```
 
@@ -217,8 +185,8 @@ newton()->broadcast('UserCreatedEvent', 'bob@example.com', 'Bob', 'Belcher');
 $newton->broadcast('UserCreatedEvent', 'bob@example.com', 'Bob', 'Belcher');
 ```
 
-In this example, the `UserCreatedEvent` class will be instantiated and will
-then instantiate the subscribed classes `SendAdminEmailListener` and `UpdateUserStatsListener`.
+In this example the `UserCreatedEvent` class will be instantiated and in turn,
+instantiate the subscribed classes `SendAdminEmailListener` and `UpdateUserStatsListener`.
 
 ## Contributing
 
