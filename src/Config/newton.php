@@ -3,17 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
-| Newton Base Paths
-|--------------------------------------------------------------------------
-|
-| Set the base paths for the Newton event and listener classes.
-|
-*/
-$config['base_event_path'] = APPPATH . 'events/';
-$config['base_listener_path'] = APPPATH . 'listeners/';
-
-/*
-|--------------------------------------------------------------------------
 | Newton Subscriptions
 |--------------------------------------------------------------------------
 |
@@ -23,9 +12,9 @@ $config['base_listener_path'] = APPPATH . 'listeners/';
 | Example:
 |
 |   $config['subscriptions'] = [
-|       'UserCreatedEvent' => [
-|           'SendAdminEmailListener',
-|           'UpdateUserStatsListener'
+|       'Events\UserCreatedEvent' => [
+|           'Listeners\SendAdminEmailListener',
+|           'Listeners\UpdateUserStatsListener'
 |       ]
 |   ];
 |

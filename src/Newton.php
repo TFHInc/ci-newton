@@ -40,19 +40,6 @@ class Newton {
         // An example file can be found in Config/newton.php
         $this->CI->config->load('newton', TRUE);
 
-        // Validate and get the config base paths - set defaults if needed
-        if (!$this->CI->config->item('base_event_path', 'newton')) {
-            $this->config['base_event_path'] = APPPATH;
-        } else {
-            $this->config['base_event_path'] = $this->CI->config->item('base_event_path', 'newton');
-        }
-
-        if (!$this->CI->config->item('base_listener_path', 'newton')) {
-            $this->config['base_listener_path'] = APPPATH;
-        } else {
-            $this->config['base_listener_path'] = $this->CI->config->item('base_listener_path', 'newton');
-        }
-
         // Subscribe listeners to events via the config file, if any have been set
         $this->config['subscriptions'] = $this->CI->config->item('subscriptions', 'newton');
         if (is_array($this->config['subscriptions'])) {
@@ -77,9 +64,6 @@ class Newton {
      */
     public function broadcast(string $event, ...$arguments): void
     {
-        // Include the event class file
-        $this->includeClassFile($this->config['base_event_path'] . $event . '.php');
-
         // Is this event subscribed to? If not, just return and don't fire
         if (!array_key_exists($event, $this->subscriptions)) {
             return;
@@ -160,15 +144,17 @@ class Newton {
             $listener_class = null;
             $listener_run_method = null;
 
-            // Include the listener class file
-            $this->includeClassFile($this->config['base_listener_path'] . $listener . '.php');
-
             // Construct the listener class via Reflection
             $listener_class = $this->constructReflectionClass($listener);
 
-            // Invoke the Listeners 'run' method and pass the 'event' instance
-            $listener_run_method = new \ReflectionMethod($listener, 'run');
-            $listener_run_method->invoke(new $listener, $event_instance);
+            // Invoke the Listener
+            if (in_array('TFHInc\\Echelon\\Traits\\EchelonQueueListener', $listener_class->getTraitNames()) === true) {
+                $listener_run_method = new \ReflectionMethod($listener, 'queue');
+                $listener_run_method->invoke(new $listener, $event_instance);
+            } else {
+                $listener_run_method = new \ReflectionMethod($listener, 'run');
+                $listener_run_method->invoke(new $listener, $event_instance);
+            }
         }
     }
 
@@ -180,21 +166,6 @@ class Newton {
 | Newton Utility Methods.
 |
 */
-    /**
-     * Include a class file.
-     *
-     * @param   string      $class_file
-     * @return  void
-     */
-    private function includeClassFile($class_file): void
-    {
-        if (file_exists($class_file) && is_readable($class_file)) {
-            include_once($class_file);
-        } else {
-            throw new Exceptions\FileNotFoundException('The file ' . $class_file . ' does not exist or is not readable.');
-        }
-    }
-
     /**
      * Construct a class via Reflection.
      *
