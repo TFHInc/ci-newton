@@ -13,8 +13,10 @@ Simply Observe - Newton allows you to Subscribe and Listen for Event Broadcasts 
 composer require tfhinc/ci-newton
 ```
 
-- Copy the `tfhinc/ci-newton/src/Config/newton.php` file to `application/config/newton.php`
-- Copy the `tfhinc/ci-newton/src/Helpers/newton_helper.php` file to `application/helpers/newton_helper.php`
+Run the post install `publish-files` command to publish the config, helper and library class files to the appropriate CI directories:
+```bash
+composer --working-dir=vendor/tfhinc/ci-newton/ run-script publish-files
+```
 
 ## Loading the Library
 
@@ -30,10 +32,18 @@ $this->load->helper('newton');
 
 ### Using the Newton Class
 
-The Newton class can be instantiated when you require it:
+The Newton class can be instantiated via namespace:
 
 ``` php
 $newton = new TFHInc/Newton/Newton();
+```
+
+### Using the Newton CI Library
+
+The Newton class can be loaded like any other CI library:
+
+``` php
+$this->load->library('Newton');
 ```
 
 ## Class Structure
@@ -92,7 +102,7 @@ class UserCreatedEvent {
 
 ### Listener Classes
 
-The `Listener` class contains the business logic that will be performed when a subscribed `Event` is broadcast. The `Listener` class will receieve an instance of the `Event` class, which includes the event properties for usage in your business logic:
+The `Listener` class contains the business logic that will be performed when a subscribed `Event` is broadcast. The `Listener` class will receive an instance of the `Event` class, which includes the event properties for usage in your business logic:
 
 Note that the `Listener` class must extend the `TFHInc/Newton/NewtonListener` abstract class.
 
@@ -149,7 +159,7 @@ class UpdateUserStatsListener extends TFHInc/Newton/NewtonListener {
 
 ## Subscriptions
 
-You can subscribe `Listener` classes to the `Event` classes. This means when the `Event` is broadcast, the subscribed `Listener` classes wil be invoked via reflection. There are two ways to subscribe `Listeners` to `Events`:
+You can subscribe `Listener` classes to the `Event` classes. This means when the `Event` is broadcast the subscribed `Listener` classes wil be invoked via reflection. There are two ways to subscribe `Listeners` to `Events`:
 
 ### Via Configuration File
 

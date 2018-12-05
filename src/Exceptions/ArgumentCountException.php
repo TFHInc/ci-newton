@@ -15,7 +15,7 @@ class ArgumentCountException extends \Exception {
      * @param   string              $message
      * @param   integer             $code
      * @param   Exception|null      $previous
-     * @return  FileDoesntExistException
+     * @return  ArgumentCountException
      */
     public function __construct($message, $code = 0, Exception $previous = null)
     {

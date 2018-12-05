@@ -1,6 +1,16 @@
 # Changelog
 
-All notable changes to the `ci-newton` will be documented in this change log file.
+All notable changes to the `ci-newton` library will be documented in this change log file.
+
+## v2.1.0 - 2018-12-04
+
+### Added
+- Added CI library class
+- Added composer publish script
+
+### Changed
+- Updated readme
+- Fixed doc block comments
 
 ## v2.0.3 - 2018-11-27
 

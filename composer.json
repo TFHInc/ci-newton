@@ -22,5 +22,12 @@
         "psr-4": {
             "TFHInc\\Newton\\": "src"
         }
+    },
+    "scripts": {
+        "publish-files": [
+            "@php -r \"copy('src/Config/newton.php', '../../../application/config/newton.php');\"",
+            "@php -r \"copy('src/Libraries/Newton.php', '../../../application/libraries/Newton.php');\"",
+            "@php -r \"copy('src/Helpers/newton_helper.php', '../../../application/helpers/newton_helper.php');\""
+        ]
     }
 }
